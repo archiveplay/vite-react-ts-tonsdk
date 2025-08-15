@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Build and Deploy
 
 on:
@@ -7,24 +5,39 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Клонируем репозиторий
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
-      - name: install dependencies
-        run: npm install
-      - name: Build
+        uses: actions/checkout@v4
+
+      # 2. Ставим зависимости
+      - name: Install dependencies
+        run: npm ci
+
+      # 3. Сборка
+      - name: Build project
         run: npm run build
         env:
           CI: false
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
 
-permissions:
-  contents: write
+      # 4. Отладка — проверим, что в dist есть билд
+      - name: Debug dist content
+        run: |
+          echo "=== DIST CONTENT ==="
+          ls -la dist
+
+      # 5. Деплой на gh-pages (с полным затиранием)
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: true # полностью очищает старое содержимое
+
