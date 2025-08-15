@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
 })
 
 // mock manifest
-const manifestUrl = "https://clayzenx.github.io/twa-gta/tonconnect-manifest.json";
+const manifestUrl = "https://archiveplay.github.io/vite-react-ts-tonsdk/tonconnect-manifest.json";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
