@@ -6,6 +6,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+  base: ((process.env.GITHUB_REPOSITORY ?? "") + "/").match(/(\/.*)/)?.[1],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
