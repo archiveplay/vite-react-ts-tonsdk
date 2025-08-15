@@ -17,6 +17,9 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.logo.telegram:hover {
+  filter: drop-shadow(0 0 2em #17aadc);
+}
 
 @keyframes logo-spin {
   from {
