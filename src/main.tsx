@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from "react-router";
 import {
   QueryClient,
   QueryClientProvider,
@@ -19,7 +20,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TonConnectUIProvider manifestUrl={manifestUrl}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </TonConnectUIProvider>
     </QueryClientProvider>
   </StrictMode>,
