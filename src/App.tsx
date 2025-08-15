@@ -1,10 +1,13 @@
 import '@/App.css'
-import { Routes, Route, NavLink } from "react-router";
+import { Routes, Route, NavLink, useLocation } from "react-router";
 import { Home } from '@/pages/Home'
 import { About } from '@/pages/About'
 import { FlexBoxRow } from './components/styled/styled';
+import { BackButton } from '@twa-dev/sdk/react';
 
 function App() {
+  const { pathname } = useLocation()
+
   return (
     <>
       <FlexBoxRow>
@@ -19,8 +22,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      {pathname !== '/' && <BackButton />}
     </>
-
   )
 }
 
