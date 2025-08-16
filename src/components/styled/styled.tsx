@@ -26,4 +26,11 @@ export const Button = styled.button`
   pointer-events: ${(props) => (props.disabled ? "none" : "inherit")};
 `;
 
+export const Card = styled.div`
+  border: 1px solid var(--tg-theme-section-bg-color);
+  border-radius: 8px;
+  padding: 20px 40px;
+  color: var(--tg-theme-text-color)
+`;
+
 

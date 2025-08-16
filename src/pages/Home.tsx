@@ -1,16 +1,15 @@
 import "@twa-dev/sdk";
-import { CHAIN } from "@tonconnect/protocol";
-import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
-import { FlexBoxRow, FlexBoxCol, Button } from '@/components/styled/styled';
+import { TonConnectButton } from "@tonconnect/ui-react";
+import { FlexBoxRow, FlexBoxCol } from '@/components/styled/styled';
 import { useTonConnect } from '@/hooks/ton/useTonConnect';
 import reactLogo from '@/assets/react.svg'
 import viteLogo from '/vite.svg'
 import telegramLogo from '@/assets/telegram.png'
+import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
 
 
 export const Home = () => {
-  const { network } = useTonConnect();
-  const userFriendlyAddress = useTonAddress();
+  const { wallet, connected } = useTonConnect();
 
   return (
     <FlexBoxCol>
@@ -31,15 +30,11 @@ export const Home = () => {
       <FlexBoxRow>
         <TonConnectButton />
       </FlexBoxRow>
-      <FlexBoxRow>
-        <Button>
-          {network
-            ? network === CHAIN.MAINNET
-              ? `mainnet: ${userFriendlyAddress} `
-              : `testnet: ${userFriendlyAddress}`
-            : "N/A"}
-        </Button>
-      </FlexBoxRow>
+      {wallet && connected && (
+        <FlexBoxRow>
+          <WalletInfo address={wallet} />
+        </FlexBoxRow>
+      )}
     </FlexBoxCol>
   )
 }
