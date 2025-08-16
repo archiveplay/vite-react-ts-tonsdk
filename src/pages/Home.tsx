@@ -1,6 +1,6 @@
 import "@twa-dev/sdk";
 import { CHAIN } from "@tonconnect/protocol";
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
 import { FlexBoxRow, FlexBoxCol, Button } from '@/components/styled/styled';
 import { useTonConnect } from '@/hooks/ton/useTonConnect';
 import reactLogo from '@/assets/react.svg'
@@ -10,6 +10,7 @@ import telegramLogo from '@/assets/telegram.png'
 
 export const Home = () => {
   const { network } = useTonConnect();
+  const userFriendlyAddress = useTonAddress();
 
   return (
     <FlexBoxCol>
@@ -29,14 +30,15 @@ export const Home = () => {
       </FlexBoxRow>
       <FlexBoxRow>
         <TonConnectButton />
+      </FlexBoxRow>
+      <FlexBoxRow>
         <Button>
           {network
             ? network === CHAIN.MAINNET
-              ? "mainnet"
-              : "testnet"
+              ? `mainnet: ${userFriendlyAddress} `
+              : `testnet: ${userFriendlyAddress}`
             : "N/A"}
         </Button>
-
       </FlexBoxRow>
     </FlexBoxCol>
   )
