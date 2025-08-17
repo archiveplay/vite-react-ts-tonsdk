@@ -1,16 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchBalance, fetchJettonsBalance } from "@/api/ton";
+import { fromNano } from "ton-core";
+import { fromDecimals } from "@/utils/ton";
+import type { Balances } from "@/types/jetton";
+
+const mapJettonBalances = (balances: Balances): Balances => {
+  return balances.map((item: any) => ({
+    jetton: item.jetton,
+    balance: fromDecimals(item.balance, item.jetton.decimals ?? 9),
+  }));
+}
 
 export function useWalletBalances(address?: string) {
   const tonQuery = useQuery({
     queryKey: ["balance", address],
-    queryFn: () => fetchBalance(address!),
+    queryFn: async () =>
+      fromNano(await fetchBalance(address!)),
     enabled: !!address,
   });
 
   const jettonsQuery = useQuery({
     queryKey: ["jettons", address],
-    queryFn: () => fetchJettonsBalance(address!),
+    queryFn: async () =>
+      mapJettonBalances(await fetchJettonsBalance(address!)),
     enabled: !!address,
   });
 

@@ -12,8 +12,8 @@ export const WalletInfo = ({ address }: { address: string }) => {
       <FlexBoxCol>
         <FlexBoxRow>Ton balance: {ton}</FlexBoxRow>
         {jettons?.map(({ jetton, balance }) => (
-          <FlexBoxRow key={jetton}>
-            {jetton} balance: {balance}
+          <FlexBoxRow key={jetton.symbol}>
+            {jetton.symbol} balance: {balance}
           </FlexBoxRow>
         ))}
       </FlexBoxCol>
