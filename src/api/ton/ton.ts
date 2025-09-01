@@ -1,4 +1,4 @@
-import { api } from '@/api'
+import { api } from '@/api/ton'
 
 /**
  * Get wallet balance (TON) via TonAPI
