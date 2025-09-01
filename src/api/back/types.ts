@@ -4,7 +4,7 @@ export interface ProfileResponse {
     id: number;
     first_name: string;
     username?: string;
-    last_login: string; // т.к. JSON -> string
+    last_login: string;
     role?: string;
     score?: number;
   };
