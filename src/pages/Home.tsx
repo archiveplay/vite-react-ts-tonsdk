@@ -6,7 +6,7 @@ import reactLogo from '@/assets/react.svg'
 import viteLogo from '/vite.svg'
 import telegramLogo from '@/assets/telegram.png'
 import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
-
+import { UserCard } from "@/components/ui/user/UserCard";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
@@ -35,6 +35,9 @@ export const Home = () => {
           <WalletInfo address={wallet} />
         </FlexBoxRow>
       )}
+      <FlexBoxRow>
+        <UserCard />
+      </FlexBoxRow>
     </FlexBoxCol>
   )
 }
