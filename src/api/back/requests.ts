@@ -1,4 +1,5 @@
 import backendApi from './index';
+import { ProfileResponse } from './types';
 
 export const login = async (initData: string) => {
   const res = await backendApi.post('/auth/login', { initData });
@@ -10,7 +11,7 @@ export const login = async (initData: string) => {
 };
 
 export const getProfile = async () => {
-  const res = await backendApi.get('/user/profile');
+  const res = await backendApi.get<ProfileResponse>('/user/profile');
   return res.data;
 };
 
