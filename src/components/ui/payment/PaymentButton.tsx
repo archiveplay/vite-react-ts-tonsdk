@@ -28,10 +28,10 @@ export const TestInvoiceButton: React.FC = () => {
       <button
         onClick={async () => {
           try {
-            const response = await backendApi.post('/payment/create-link', {
+            const response = await backendApi.post('/user-payment/top-up', {
               provider: 'stars', // строго ограничено enum
-              title: 'Тестовый товар',
-              description: 'Описание тестового товара',
+              title: 'Пополнить баланс',
+              description: 'Пополнения баланса на 1 star',
               payload: 'test_order_1',
               amount: 1,
             });
@@ -43,7 +43,7 @@ export const TestInvoiceButton: React.FC = () => {
           }
         }}
       >
-        Купить
+        Пополнить баланс на 1
       </button>
     </>
   )
