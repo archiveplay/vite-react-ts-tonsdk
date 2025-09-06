@@ -33,7 +33,7 @@ export const TestInvoiceButton: React.FC = () => {
               title: 'Тестовый товар',
               description: 'Описание тестового товара',
               payload: 'test_order_1',
-              amount: 100,
+              amount: 1,
             });
 
             console.log('response', response);
