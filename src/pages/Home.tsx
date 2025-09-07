@@ -49,7 +49,6 @@ export const Home = () => {
         <TestInvoiceButton />
       </FlexBoxRow>
       <FlexBoxRow>
-        <h1>Telegram Mini App</h1>
         <p>Viewport: {JSON.stringify(viewport)}</p>
         <p>Theme: {theme}</p>
       </FlexBoxRow>

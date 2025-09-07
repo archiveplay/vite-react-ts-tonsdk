@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { on } from "@telegram-apps/sdk";
+import WebApp from "@twa-dev/sdk";
 
 type TelegramState = {
   viewport?: any;
@@ -14,25 +14,32 @@ export const TelegramAppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [state, setState] = useState<TelegramState>({});
 
   useEffect(() => {
-    const removeSetting = on("settings_button_pressed", (payload) => {
-      console.log("settings_button_pressed", payload);
-    });
+    WebApp.expand();
+    WebApp.ready();
 
-    const removeViewport = on("viewport_changed", (payload) => {
+    const onViewportChanged = (payload: any) => {
       setState((prev) => ({ ...prev, viewport: payload }));
-    });
+    };
+    WebApp.onEvent("viewportChanged", onViewportChanged);
 
-    const removeTheme = on("theme_changed", (payload) => {
+    const onThemeChanged = (payload: any) => {
+      console.log("onThemeChanged", payload);
       setState((prev) => ({
         ...prev,
-        theme: payload.theme_params?.bg_color || "light",
+        theme: payload?.themeParams?.bg_color || "light",
       }));
-    });
+    };
+    WebApp.onEvent("themeChanged", onThemeChanged);
+
+    const onSettingsClicked = (payload: any) => {
+      console.log("settingsButtonClicked", payload);
+    };
+    WebApp.onEvent("settingsButtonClicked", onSettingsClicked);
 
     return () => {
-      removeViewport();
-      removeTheme();
-      removeSetting();
+      WebApp.offEvent("viewportChanged", onViewportChanged);
+      WebApp.offEvent("themeChanged", onThemeChanged);
+      WebApp.offEvent("settingsButtonClicked", onSettingsClicked);
     };
   }, []);
 
