@@ -8,9 +8,11 @@ import telegramLogo from "@/assets/telegram.png";
 import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
 import { UserCard } from "@/components/ui/user/UserCard";
 import { TestInvoiceButton } from "@/components/ui/payment/PaymentButton";
+import { useTelegramApp } from "@/providers/TelegramAppContext";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
+  const { viewport, theme } = useTelegramApp();
 
   return (
     <FlexBoxCol>
@@ -45,6 +47,11 @@ export const Home = () => {
       </FlexBoxRow>
       <FlexBoxRow>
         <TestInvoiceButton />
+      </FlexBoxRow>
+      <FlexBoxRow>
+        <h1>Telegram Mini App</h1>
+        <p>Viewport: {JSON.stringify(viewport)}</p>
+        <p>Theme: {theme}</p>
       </FlexBoxRow>
     </FlexBoxCol>
   );

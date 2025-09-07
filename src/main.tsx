@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@/index.css";
 import App from "@/App.tsx";
+import { TelegramAppProvider } from "@/providers/TelegramAppContext";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -22,9 +23,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TonConnectUIProvider manifestUrl={manifestUrl}>
-        <BrowserRouter basename={basePath}>
-          <App />
-        </BrowserRouter>
+        <TelegramAppProvider>
+          <BrowserRouter basename={basePath}>
+            <App />
+          </BrowserRouter>
+        </TelegramAppProvider>
       </TonConnectUIProvider>
     </QueryClientProvider>
   </StrictMode>,
