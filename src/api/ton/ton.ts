@@ -1,4 +1,4 @@
-import { api } from '@/api/ton'
+import { api } from "@/api/ton";
 
 /**
  * Get wallet balance (TON) via TonAPI
@@ -19,4 +19,3 @@ export async function fetchJettonsBalance(address: string) {
   const { data } = await api.get(`/accounts/${address}/jettons`);
   return data.balances;
 }
-

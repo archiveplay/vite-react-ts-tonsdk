@@ -1,26 +1,24 @@
-import { StrictMode } from 'react'
+import { StrictMode } from "react";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { createRoot } from 'react-dom/client'
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-import '@/index.css'
-import App from '@/App.tsx'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "@/index.css";
+import App from "@/App.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
-})
+});
 
 // mock manifest
-const manifestUrl = "https://archiveplay.github.io/vite-react-ts-tonsdk/tonconnect-manifest.json";
+const manifestUrl =
+  "https://archiveplay.github.io/vite-react-ts-tonsdk/tonconnect-manifest.json";
 
 const basePath = window.location.pathname.split("/")[1]
   ? `/${window.location.pathname.split("/")[1]}`
   : "";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TonConnectUIProvider manifestUrl={manifestUrl}>
@@ -29,5 +27,5 @@ createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </TonConnectUIProvider>
     </QueryClientProvider>
-  </StrictMode>
-)
+  </StrictMode>,
+);

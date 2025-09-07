@@ -10,7 +10,10 @@
  * @param {number} decimals - The number of decimal places of the token
  * @returns {number} The converted human-readable value
  */
-export const fromDecimals = (value: string | number, decimals: number): number => {
+export const fromDecimals = (
+  value: string | number,
+  decimals: number,
+): number => {
   return Number(value) / Math.pow(10, decimals);
 };
 
@@ -29,4 +32,3 @@ export const fromDecimals = (value: string | number, decimals: number): number =
 export const toDecimals = (value: number, decimals: number): string => {
   return (value * Math.pow(10, decimals)).toFixed(0);
 };
-

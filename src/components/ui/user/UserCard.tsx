@@ -1,11 +1,14 @@
-import { Card, FlexBoxCol, FlexBoxRow } from '@/components/styled/styled';
-import { useProfileData } from '@/hooks/user/useProfileData';
+import { Card, FlexBoxCol, FlexBoxRow } from "@/components/styled/styled";
+import { useProfileData } from "@/hooks/user/useProfileData";
 
 export function UserCard() {
   const { data, isLoading, error } = useProfileData();
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {(error as any).message}, user profile can not load</div>;
+  if (error)
+    return (
+      <div>Error: {(error as any).message}, user profile can not load</div>
+    );
 
   return (
     <Card>
@@ -15,4 +18,3 @@ export function UserCard() {
     </Card>
   );
 }
-

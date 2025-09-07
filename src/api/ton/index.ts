@@ -5,5 +5,4 @@ export const api = axios.create({
   timeout: 10000,
 });
 
-export * from './ton'
-
+export * from "./ton";
