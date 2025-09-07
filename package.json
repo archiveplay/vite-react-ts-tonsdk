@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prettier": "prettier --write 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts'",
     "build": "tsc -b && vite build",
     "test": "vitest",
     "lint": "eslint .",
