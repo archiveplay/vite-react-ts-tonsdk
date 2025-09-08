@@ -12,7 +12,7 @@ import { useTelegramApp } from "@/providers/TelegramAppContext";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
-  const { viewport, theme } = useTelegramApp();
+  const { lastInvoice } = useTelegramApp();
 
   return (
     <FlexBoxCol>
@@ -49,8 +49,8 @@ export const Home = () => {
         <TestInvoiceButton />
       </FlexBoxRow>
       <FlexBoxRow>
-        <p>Viewport: {JSON.stringify(viewport)}</p>
-        <p>Theme: {theme}</p>
+        <p>Last invoice: {JSON.stringify(lastInvoice?.url)}</p>
+        <p>Status: {lastInvoice?.status}</p>
       </FlexBoxRow>
     </FlexBoxCol>
   );
