@@ -30,7 +30,10 @@ export const TelegramAppProvider: React.FC<{ children: React.ReactNode }> = ({
     const onInvoiceClosed = (invoice: InvoiceEvent) => {
       if (invoice.status === "paid") {
         WebApp.HapticFeedback.notificationOccurred("success");
-        WebApp.showAlert("✅ Payment success!");
+        WebApp.showPopup({
+          title: "Success",
+          message: "✅ Payment success!",
+        });
       } else {
         WebApp.HapticFeedback.notificationOccurred("error");
         WebApp.showPopup({
