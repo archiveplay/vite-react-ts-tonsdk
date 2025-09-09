@@ -2,6 +2,7 @@ import "@/App.css";
 import { Routes, Route, NavLink, useLocation } from "react-router";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
+import { Settings } from "@/pages/Settings";
 import { FlexBoxRow } from "./components/styled/styled";
 import { BackButton } from "@twa-dev/sdk/react";
 
@@ -23,10 +24,17 @@ function App() {
         >
           About
         </NavLink>
+        <NavLink
+          to="/settings"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          About
+        </NavLink>
       </FlexBoxRow>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       {pathname !== "/" && <BackButton />}
     </>

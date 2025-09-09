@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import WebApp from "@twa-dev/sdk";
 import { PaymentStatus } from "@/types/payment";
+import { redirect } from "react-router";
 
 type InvoiceEvent = {
   url: string;
@@ -19,6 +20,13 @@ export const TelegramAppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [state, setState] = useState<TelegramAppState>({});
 
   useEffect(() => {
+    WebApp.SettingsButton.show();
+
+    const onSettingButtonClicked = () => {
+      redirect("/settings");
+    };
+    WebApp.onEvent("settingsButtonClicked", onSettingButtonClicked);
+
     const onInvoiceClosed = (invoice: InvoiceEvent) => {
       if (invoice.status === "paid") {
         WebApp.HapticFeedback.notificationOccurred("success");
@@ -37,6 +45,7 @@ export const TelegramAppProvider: React.FC<{ children: React.ReactNode }> = ({
 
     return () => {
       WebApp.offEvent("invoiceClosed", onInvoiceClosed);
+      WebApp.offEvent("settingsButtonClicked", onSettingButtonClicked);
     };
   }, []);
 
