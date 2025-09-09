@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import WebApp from "@twa-dev/sdk";
 import { PaymentStatus } from "@/types/payment";
-import { redirect } from "react-router";
+import { useNavigate } from "react-router";
 
 type InvoiceEvent = {
   url: string;
@@ -18,12 +18,14 @@ export const TelegramAppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [state, setState] = useState<TelegramAppState>({});
+  let navigate = useNavigate();
 
   useEffect(() => {
     WebApp.SettingsButton.show();
 
     const onSettingButtonClicked = () => {
-      redirect("/settings");
+      console.log("onSettingButtonClicked", navigate);
+      navigate("/settings");
     };
     WebApp.onEvent("settingsButtonClicked", onSettingButtonClicked);
 

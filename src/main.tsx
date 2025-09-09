@@ -23,11 +23,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TonConnectUIProvider manifestUrl={manifestUrl}>
-        <TelegramAppProvider>
-          <BrowserRouter basename={basePath}>
+        <BrowserRouter basename={basePath}>
+          <TelegramAppProvider>
             <App />
-          </BrowserRouter>
-        </TelegramAppProvider>
+          </TelegramAppProvider>
+        </BrowserRouter>
       </TonConnectUIProvider>
     </QueryClientProvider>
   </StrictMode>,

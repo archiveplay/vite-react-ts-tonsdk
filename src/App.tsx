@@ -28,7 +28,7 @@ function App() {
           to="/settings"
           className={({ isActive }) => (isActive ? "active" : "")}
         >
-          About
+          Settings
         </NavLink>
       </FlexBoxRow>
       <Routes>
