@@ -17,8 +17,7 @@ export const TestInvoiceButton: React.FC = () => {
               amount: 0.1,
             });
 
-            console.log("response", response);
-            WebApp.openLink(response.data.url);
+            WebApp.openTelegramLink(response.data.mini_app_invoice_url);
           } catch (err) {
             console.error("Ошибка при создании invoice", err);
           }
@@ -38,8 +37,7 @@ export const TestInvoiceButton: React.FC = () => {
               amount: 0.01,
             });
 
-            console.log("response", response);
-            WebApp.openLink(response.data.url);
+            WebApp.openTelegramLink(response.data.mini_app_invoice_url);
           } catch (err) {
             console.error("Ошибка при создании invoice", err);
           }
