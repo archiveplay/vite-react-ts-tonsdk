@@ -8,22 +8,44 @@ export const TestInvoiceButton: React.FC = () => {
       <button
         onClick={async () => {
           try {
-            const response = await backendApi.post("/payment/create-link", {
-              provider: "cryptobot", // строго ограничено enum
-              title: "Тестовый товар",
-              description: "Описание тестового товара",
+            const response = await backendApi.post("/user-payment/top-up", {
+              provider: "cryptobot",
+              title: "Пополнить баланс",
+              description: "Пополнения баланса на 0.01 usdt",
+              currency: "USDT",
               payload: "test_order_1",
-              amount: 10000,
+              amount: 0.01,
             });
 
             console.log("response", response);
-            WebApp.openInvoice(response.data.url);
+            WebApp.openLink(response.data.url);
           } catch (err) {
             console.error("Ошибка при создании invoice", err);
           }
         }}
       >
-        cryptobot
+        cryptobot usdt
+      </button>
+      <button
+        onClick={async () => {
+          try {
+            const response = await backendApi.post("/user-payment/top-up", {
+              provider: "cryptobot",
+              title: "Пополнить баланс",
+              description: "Пополнения баланса на 0.01 ton",
+              currency: "TON",
+              payload: "test_order_1",
+              amount: 0.01,
+            });
+
+            console.log("response", response);
+            WebApp.openLink(response.data.url);
+          } catch (err) {
+            console.error("Ошибка при создании invoice", err);
+          }
+        }}
+      >
+        cryptobot ton
       </button>
       <button
         onClick={async () => {
