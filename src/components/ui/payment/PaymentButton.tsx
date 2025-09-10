@@ -14,7 +14,7 @@ export const TestInvoiceButton: React.FC = () => {
               description: "Пополнения баланса на 0.01 usdt",
               currency: "USDT",
               payload: "test_order_1",
-              amount: 0.01,
+              amount: 0.1,
             });
 
             console.log("response", response);
