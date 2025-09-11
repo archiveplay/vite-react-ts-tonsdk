@@ -1,5 +1,5 @@
 import backendApi from "./index";
-import { ProfileResponse } from "./types";
+import { ProfileResponse, TopUpOption } from "./types";
 
 export const login = async (initData: string) => {
   const res = await backendApi.post("/auth/login", { initData });
@@ -13,4 +13,13 @@ export const login = async (initData: string) => {
 export const getProfile = async () => {
   const res = await backendApi.get<ProfileResponse>("/user/profile");
   return res.data;
+};
+
+export const topUpBalance = async (opt: TopUpOption) => {
+  try {
+    const res = await backendApi.post("/user-payment/top-up", opt);
+    return res.data;
+  } catch (err) {
+    console.error("Ошибка при создании invoice", err);
+  }
 };
