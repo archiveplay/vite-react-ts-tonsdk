@@ -23,3 +23,8 @@ export const topUpBalance = async (opt: TopUpOption) => {
     console.error("Ошибка при создании invoice", err);
   }
 };
+
+export const getInvoiceStatus = async (id: number) => {
+  const res = await backendApi.get(`/user-payment/${id}/status`);
+  return res.data;
+};
