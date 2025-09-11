@@ -3,6 +3,9 @@ import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AppRoot } from "@telegram-apps/telegram-ui";
+
+import "@telegram-apps/telegram-ui/dist/styles.css";
 import "@/index.css";
 import App from "@/App.tsx";
 import { TelegramAppProvider } from "@/providers/TelegramAppContext";
@@ -25,7 +28,9 @@ createRoot(document.getElementById("root")!).render(
       <TonConnectUIProvider manifestUrl={manifestUrl}>
         <BrowserRouter basename={basePath}>
           <TelegramAppProvider>
-            <App />
+            <AppRoot>
+              <App />
+            </AppRoot>
           </TelegramAppProvider>
         </BrowserRouter>
       </TonConnectUIProvider>
