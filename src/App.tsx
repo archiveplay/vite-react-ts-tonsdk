@@ -1,5 +1,5 @@
 import "@/App.css";
-import { Routes, Route, NavLink, useLocation } from "react-router";
+import { Routes, Route, useLocation, useNavigate } from "react-router";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
 import { Settings } from "@/pages/Settings";
@@ -10,7 +10,7 @@ import { TabbarItem } from "@telegram-apps/telegram-ui/dist/components/Layout/Ta
 
 function App() {
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -23,35 +23,31 @@ function App() {
 
       <FixedLayout vertical="bottom">
         <Tabbar>
-          <NavLink to="/" style={{ flexGrow: 1 }}>
-            <TabbarItem
-              style={{ width: "100%" }}
-              title="home"
-              text="Home"
-              selected={pathname === "/"}
-            />
-          </NavLink>
-          <NavLink to="/about" style={{ flexGrow: 1 }}>
-            <TabbarItem
-              style={{ width: "100%" }}
-              text="About"
-              selected={pathname === "/about"}
-            />
-          </NavLink>
-          <NavLink to="/settings" style={{ flexGrow: 1 }}>
-            <TabbarItem
-              style={{ width: "100%" }}
-              text="Settings"
-              selected={pathname === "/settings"}
-            />
-          </NavLink>
-          <NavLink to="/payment" style={{ flexGrow: 1 }}>
-            <TabbarItem
-              style={{ width: "100%" }}
-              text="Payment"
-              selected={pathname === "/payment"}
-            />
-          </NavLink>
+          <TabbarItem
+            style={{ flexGrow: 1 }}
+            title="home"
+            text="Home"
+            selected={pathname === "/"}
+            onClick={() => navigate("/")}
+          />
+          <TabbarItem
+            style={{ flexGrow: 1 }}
+            text="About"
+            selected={pathname === "/about"}
+            onClick={() => navigate("/about")}
+          />
+          <TabbarItem
+            style={{ flexGrow: 1 }}
+            text="Settings"
+            selected={pathname === "/settings"}
+            onClick={() => navigate("/settings")}
+          />
+          <TabbarItem
+            style={{ flexGrow: 1 }}
+            text="Payment"
+            selected={pathname === "/payment"}
+            onClick={() => navigate("/payment")}
+          />
         </Tabbar>
       </FixedLayout>
       {pathname !== "/" && <BackButton />}
