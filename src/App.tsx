@@ -3,7 +3,6 @@ import { Routes, Route, NavLink, useLocation } from "react-router";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
 import { Settings } from "@/pages/Settings";
-import { FlexBoxRow } from "./components/styled/styled";
 import { BackButton } from "@twa-dev/sdk/react";
 import { Payment } from "./pages/Payment";
 import { Tabbar, FixedLayout } from "@telegram-apps/telegram-ui";

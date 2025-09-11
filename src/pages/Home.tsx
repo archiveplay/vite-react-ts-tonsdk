@@ -9,7 +9,6 @@ import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
 import { UserCard } from "@/components/ui/user/UserCard";
 import { TestInvoiceButton } from "@/components/ui/payment/PaymentButton";
 import { useTelegramApp } from "@/providers/TelegramAppContext";
-import { Placeholder } from "@telegram-apps/telegram-ui";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
