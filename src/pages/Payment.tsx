@@ -1,8 +1,8 @@
 import { getInvoiceStatus } from "@/api/back";
-import { Button } from "@/components/styled/styled";
 import TopUpWrapper from "@/components/ui/payment/TopUpWrapper";
 import { PaymentStatus } from "@/types/payment";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@telegram-apps/telegram-ui";
 import WebApp from "@twa-dev/sdk";
 import { useState } from "react";
 
@@ -48,7 +48,9 @@ export const Payment = () => {
         provider="cryptobot"
         onTopUp={onTopUpHandler}
       >
-        <Button>Оплатить</Button>
+        <Button mode="filled" size="m">
+          Top Up
+        </Button>
       </TopUpWrapper>
     </>
   );
