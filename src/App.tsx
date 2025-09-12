@@ -22,7 +22,7 @@ function App() {
       </Routes>
 
       <FixedLayout vertical="bottom">
-        <Tabbar>
+        <Tabbar className="tab-bar">
           <TabbarItem
             style={{ flexGrow: 1 }}
             title="home"
