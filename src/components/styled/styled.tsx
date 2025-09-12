@@ -10,7 +10,7 @@ export const AppContainer = styled.div`
 export const FlexBoxRow = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 `;
 

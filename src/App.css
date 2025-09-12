@@ -5,7 +5,7 @@
 }
 
 .logo {
-  height: clamp(3em, 5vw, 6em);
+  height: clamp(2em, 4vw, 5em);
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
@@ -42,7 +42,7 @@
   border-radius: 20px 20px 0px 0px;
 }
 .tab-bar button {
-  padding: 8px 12px 8px;
+  padding: 16px;
 }
 
 .card {

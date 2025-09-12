@@ -9,6 +9,7 @@ import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
 import { UserCard } from "@/components/ui/user/UserCard";
 import { TestInvoiceButton } from "@/components/ui/payment/PaymentButton";
 import { useTelegramApp } from "@/providers/TelegramAppContext";
+import { SectionHeader } from "@telegram-apps/telegram-ui/dist/components/Blocks/Section/components/SectionHeader/SectionHeader";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
@@ -16,6 +17,10 @@ export const Home = () => {
 
   return (
     <FlexBoxCol>
+      <FlexBoxRow>
+        <SectionHeader>Vite + React + TWA</SectionHeader>
+      </FlexBoxRow>
+
       <FlexBoxRow>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -40,9 +45,6 @@ export const Home = () => {
             className="logo tgui"
           />
         </a>
-      </FlexBoxRow>
-      <FlexBoxRow>
-        <h1>Vite + React + TWA</h1>
       </FlexBoxRow>
       <FlexBoxRow>
         <TonConnectButton />
