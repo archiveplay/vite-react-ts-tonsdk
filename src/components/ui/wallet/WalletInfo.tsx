@@ -1,5 +1,6 @@
 import { Card, FlexBoxCol, FlexBoxRow } from "@/components/styled/styled";
 import { useWalletBalances } from "@/hooks/ton/useWalletBalances";
+import { Text } from "@telegram-apps/telegram-ui";
 
 export const WalletInfo = ({ address }: { address: string }) => {
   const { ton, jettons, tonLoading, jettonsLoading } =
@@ -11,10 +12,14 @@ export const WalletInfo = ({ address }: { address: string }) => {
   return (
     <Card>
       <FlexBoxCol>
-        <FlexBoxRow>Ton balance: {ton}</FlexBoxRow>
+        <FlexBoxRow>
+          <Text>Ton: {ton}</Text>
+        </FlexBoxRow>
         {jettons?.map(({ jetton, balance }) => (
           <FlexBoxRow key={jetton.symbol}>
-            {jetton.symbol} balance: {balance}
+            <Text>
+              {jetton.symbol}: {balance}
+            </Text>
           </FlexBoxRow>
         ))}
       </FlexBoxCol>

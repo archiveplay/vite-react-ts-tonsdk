@@ -34,8 +34,8 @@ export const Button = styled.button`
 `;
 
 export const Card = styled.div`
-  border: 1px solid var(--tg-theme-section-bg-color);
-  border-radius: 8px;
+  background-color: var(--tg-theme-secondary-bg-color)
+  border-radius: 12px;
   padding: 20px 40px;
   color: var(--tg-theme-text-color);
 `;

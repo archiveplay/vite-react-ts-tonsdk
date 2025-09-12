@@ -6,19 +6,23 @@ import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import telegramLogo from "@/assets/telegram.png";
 import { WalletInfo } from "@/components/ui/wallet/WalletInfo";
-import { UserCard } from "@/components/ui/user/UserCard";
-import { TestInvoiceButton } from "@/components/ui/payment/PaymentButton";
-import { useTelegramApp } from "@/providers/TelegramAppContext";
 import { SectionHeader } from "@telegram-apps/telegram-ui/dist/components/Blocks/Section/components/SectionHeader/SectionHeader";
+import { useProfileData } from "@/hooks/user/useProfileData";
+import { Avatar, FixedLayout } from "@telegram-apps/telegram-ui";
 
 export const Home = () => {
   const { wallet, connected } = useTonConnect();
-  const { lastInvoice } = useTelegramApp();
+  const { data } = useProfileData();
 
   return (
     <FlexBoxCol>
-      <FlexBoxRow>
+      <FixedLayout vertical="top">
         <SectionHeader>Vite + React + TWA</SectionHeader>
+      </FixedLayout>
+
+      <FlexBoxRow>
+        <Avatar size={48} src={data?.user.photo_url} />
+        <TonConnectButton />
       </FlexBoxRow>
 
       <FlexBoxRow>
@@ -46,24 +50,11 @@ export const Home = () => {
           />
         </a>
       </FlexBoxRow>
-      <FlexBoxRow>
-        <TonConnectButton />
-      </FlexBoxRow>
       {wallet && connected && (
         <FlexBoxRow>
           <WalletInfo address={wallet} />
         </FlexBoxRow>
       )}
-      <FlexBoxRow>
-        <UserCard />
-      </FlexBoxRow>
-      <FlexBoxRow>
-        <TestInvoiceButton />
-      </FlexBoxRow>
-      <FlexBoxRow>
-        <p>Last invoice: {JSON.stringify(lastInvoice?.url)}</p>
-        <p>Status: {lastInvoice?.status}</p>
-      </FlexBoxRow>
     </FlexBoxCol>
   );
 };

@@ -39,7 +39,7 @@
 }
 
 .tab-bar {
-  border-radius: 20px 20px 0px 0px;
+  padding-bottom: 16px;
 }
 .tab-bar button {
   padding: 16px;

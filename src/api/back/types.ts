@@ -5,10 +5,13 @@ export interface ProfileResponse {
   user: {
     id: number;
     first_name: string;
-    username?: string;
+    last_name: string;
+    username: string;
+    language_code: string;
+    photo_url: string;
     last_login: string;
-    role?: string;
-    score?: number;
+    allows_write_to_pm: boolean;
+    balance: number;
   };
 }
 
