@@ -15,6 +15,10 @@ export interface ProfileResponse {
   };
 }
 
+export interface BalanceResponse {
+  balances: Record<keyof typeof CurrencyType, number>;
+}
+
 export interface TopUpOption {
   provider: PaymentProvider;
   title: string;

@@ -1,8 +1,9 @@
 import { getInvoiceStatus } from "@/api/back";
 import TopUpWrapper from "@/components/ui/payment/TopUpWrapper";
+import { useBalance } from "@/hooks/user/useBalance";
 import { PaymentStatus } from "@/types/payment";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@telegram-apps/telegram-ui";
+import { Button, Divider, Text } from "@telegram-apps/telegram-ui";
 import WebApp from "@twa-dev/sdk";
 import { useState } from "react";
 
@@ -27,9 +28,9 @@ export const Payment = () => {
       return 2000;
     },
   });
+  const { data } = useBalance([paymentStatusQuery.data?.status]);
 
   const onTopUpHandler = (data: any) => {
-    console.log("data", data);
     setInvoice(data);
     WebApp.openTelegramLink(data.mini_app_invoice_url);
     paymentStatusQuery.refetch();
@@ -37,10 +38,19 @@ export const Payment = () => {
 
   return (
     <>
+      {data?.balances &&
+        Object.entries(data.balances).map(([currency, amount]) => (
+          <>
+            <Text>
+              {currency}: {amount}
+            </Text>
+            <Divider />
+          </>
+        ))}
       {invoice && (
-        <p className="mt-4">
+        <Text>
           Статус платежа: {paymentStatusQuery.data?.status ?? "ожидание..."}
-        </p>
+        </Text>
       )}
       <TopUpWrapper
         amount={5}

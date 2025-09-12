@@ -1,5 +1,5 @@
 import backendApi from "./index";
-import { ProfileResponse, TopUpOption } from "./types";
+import { BalanceResponse, ProfileResponse, TopUpOption } from "./types";
 
 export const login = async (initData: string) => {
   const res = await backendApi.post("/auth/login", { initData });
@@ -12,6 +12,11 @@ export const login = async (initData: string) => {
 
 export const getProfile = async () => {
   const res = await backendApi.get<ProfileResponse>("/user/profile");
+  return res.data;
+};
+
+export const getBalance = async () => {
+  const res = await backendApi.get<BalanceResponse>("/user/balance");
   return res.data;
 };
 
