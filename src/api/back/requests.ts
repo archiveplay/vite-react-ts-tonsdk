@@ -1,3 +1,4 @@
+import { CurrencyType } from "@/types/payment";
 import backendApi from "./index";
 import { BalanceResponse, ProfileResponse, TopUpOption } from "./types";
 
@@ -29,10 +30,13 @@ export const topUpBalance = async (opt: TopUpOption) => {
   }
 };
 
-export const sendPayout = async (amount: number) => {
+export const sendPayout = async (amount: number, currency: CurrencyType) => {
   try {
-    const { data } = await backendApi.post("/payout/send", { amount });
-    console.log("Tx hash:", data.txHash);
+    const { data } = await backendApi.post("/payout/send", {
+      amount,
+      currency,
+    });
+    console.log("Tx hash:", data);
     alert("Выплата успешно отправлена!");
   } catch (err) {
     console.error(err);

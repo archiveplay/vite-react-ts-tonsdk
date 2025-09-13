@@ -1,33 +1,27 @@
-import { getInvoiceStatus, sendPayout } from "@/api/back";
+import { sendPayout } from "@/api/back";
+import { FlexBoxRow } from "@/components/styled/styled";
 import TopUpWrapper from "@/components/ui/payment/TopUpWrapper";
+import { usePayment } from "@/hooks/ton/useWalletBalances";
 import { useBalance } from "@/hooks/user/useBalance";
-import { PaymentStatus } from "@/types/payment";
-import { useQuery } from "@tanstack/react-query";
-import { Button, Divider, Text } from "@telegram-apps/telegram-ui";
+import { CurrencyType } from "@/types/payment";
+import {
+  Button,
+  Divider,
+  Input,
+  List,
+  Select,
+  Text,
+} from "@telegram-apps/telegram-ui";
 import WebApp from "@twa-dev/sdk";
 import { useState } from "react";
 
-type PaymentStatusResponse = {
-  status: PaymentStatus;
-};
-
 export const Payment = () => {
   const [invoice, setInvoice] = useState<{ id: number } | null>(null);
+  const [amount, setAmount] = useState(0.5);
+  const [currency, setCurrency] = useState("USDT");
 
-  const paymentStatusQuery = useQuery<PaymentStatusResponse>({
-    queryKey: ["paymentStatus", invoice?.id],
-    queryFn: async () => await getInvoiceStatus(invoice!.id),
-    enabled: !!invoice,
-    retry: false,
-    refetchInterval: (query) => {
-      const status = query.state.data?.status;
-      if (!status) return 2000;
-      if (["paid", "failed", "cancelled"].includes(status)) {
-        return false;
-      }
-      return 2000;
-    },
-  });
+  const paymentStatusQuery = usePayment(invoice);
+
   const { data } = useBalance([paymentStatusQuery.data?.status]);
 
   const onTopUpHandler = (data: any) => {
@@ -37,7 +31,7 @@ export const Payment = () => {
   };
 
   const payout = async () => {
-    const r = await sendPayout(0.01);
+    const r = await sendPayout(amount, currency);
     console.log("r", r);
   };
 
@@ -67,6 +61,33 @@ export const Payment = () => {
           Top Up
         </Button>
       </TopUpWrapper>
+
+      <Divider />
+
+      <FlexBoxRow>
+        <Input
+          value={amount}
+          onChange={(e) => setAmount(+e.target.value)}
+          header="Amount"
+          placeholder="amount of payout"
+        />
+        <List
+          style={{
+            width: 240,
+            background: "var(--tgui--secondary_bg_color)",
+          }}
+        >
+          <Select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            header="Select"
+          >
+            {Object.values(CurrencyType).map((currency) => (
+              <option value={currency}>{currency}</option>
+            ))}
+          </Select>
+        </List>
+      </FlexBoxRow>
 
       <Button mode="filled" size="m" onClick={payout}>
         PayOut

@@ -3,6 +3,12 @@ import { fetchBalance, fetchJettonsBalance } from "@/api/ton";
 import { fromNano } from "ton-core";
 import { fromDecimals } from "@/utils/ton";
 import type { Balances } from "@/types/jetton";
+import { PaymentStatus } from "@/types/payment";
+import { getInvoiceStatus } from "@/api/back";
+
+type PaymentStatusResponse = {
+  status: PaymentStatus;
+};
 
 const mapJettonBalances = (balances: Balances): Balances => {
   return balances.map((item: any) => ({
@@ -33,4 +39,21 @@ export function useWalletBalances(address?: string) {
     jettonsLoading: jettonsQuery.isLoading,
     jettonsError: jettonsQuery.error,
   };
+}
+
+export function usePayment(invoice: { id: number } | null) {
+  return useQuery<PaymentStatusResponse>({
+    queryKey: ["paymentStatus", invoice?.id],
+    queryFn: async () => await getInvoiceStatus(invoice!.id),
+    enabled: !!invoice,
+    retry: false,
+    refetchInterval: (query) => {
+      const status = query.state.data?.status;
+      if (!status) return 2000;
+      if (["paid", "failed", "cancelled"].includes(status)) {
+        return false;
+      }
+      return 2000;
+    },
+  });
 }
