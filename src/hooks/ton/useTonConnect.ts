@@ -1,6 +1,8 @@
 import { CHAIN } from "@tonconnect/protocol";
 import { Sender, SenderArguments } from "ton-core";
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
+import { useEffect } from "react";
+import backendApi from "@/api/back";
 
 export function useTonConnect(): {
   sender: Sender;
@@ -10,6 +12,16 @@ export function useTonConnect(): {
 } {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
+
+  useEffect(() => {
+    if (wallet?.account?.address) {
+      console.log("wallet changed", wallet);
+      backendApi
+        .post("/user/set-wallet", { address: wallet.account.address })
+        .then((res) => console.log("Wallet saved", res.data))
+        .catch((err) => console.error("Failed to save wallet", err));
+    }
+  }, [wallet]);
 
   return {
     sender: {
