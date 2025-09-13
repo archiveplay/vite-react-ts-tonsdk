@@ -29,6 +29,17 @@ export const topUpBalance = async (opt: TopUpOption) => {
   }
 };
 
+export const sendPayout = async (amount: number) => {
+  try {
+    const { data } = await backendApi.post("/payout/send", { amount });
+    console.log("Tx hash:", data.txHash);
+    alert("Выплата успешно отправлена!");
+  } catch (err) {
+    console.error(err);
+    alert("Ошибка при выплате");
+  }
+};
+
 export const getInvoiceStatus = async (id: number) => {
   const res = await backendApi.get(`/user-payment/${id}/status`);
   return res.data;

@@ -1,4 +1,4 @@
-import { getInvoiceStatus } from "@/api/back";
+import { getInvoiceStatus, sendPayout } from "@/api/back";
 import TopUpWrapper from "@/components/ui/payment/TopUpWrapper";
 import { useBalance } from "@/hooks/user/useBalance";
 import { PaymentStatus } from "@/types/payment";
@@ -36,6 +36,11 @@ export const Payment = () => {
     paymentStatusQuery.refetch();
   };
 
+  const payout = async () => {
+    const r = await sendPayout(0.01);
+    console.log("r", r);
+  };
+
   return (
     <>
       {data?.balances &&
@@ -62,6 +67,10 @@ export const Payment = () => {
           Top Up
         </Button>
       </TopUpWrapper>
+
+      <Button mode="filled" size="m" onClick={payout}>
+        PayOut
+      </Button>
     </>
   );
 };
